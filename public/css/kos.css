@@ -1,0 +1,180 @@
+/* Blue House Kost — gaya kustom. Utilitas lain memakai Tailwind CDN. */
+:root {
+    --surface: 246 250 255; --lowest: 255 255 255; --low: 237 244 252; --container: 232 239 247; --high: 226 233 241;
+    --navy: 15 42 92; --muted: 71 85 105; --primary: 37 99 235; --primary-fixed: 219 225 255;
+    --cyan: 6 182 212; --outline: 115 118 134; --line: 219 234 254;
+}
+.dark {
+    --surface: 9 16 30; --lowest: 16 26 45; --low: 19 31 53; --container: 25 39 65; --high: 33 49 79;
+    --navy: 226 236 255; --muted: 160 174 196; --primary: 110 160 255; --primary-fixed: 30 52 100;
+    --cyan: 34 211 238; --outline: 130 145 170; --line: 40 58 92;
+}
+body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: rgb(var(--surface)); color: rgb(var(--navy)); }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400; font-size: inherit; line-height: 1; }
+ .bg-grad { background: #2563EB; }
+.bg-grad-deep { background: #0F2A5C; }
+.text-grad { color: rgb(var(--primary)); }
+ .glass { background: rgb(var(--lowest) / .75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgb(var(--line) / .6); }
+.card { background: rgb(var(--lowest)); border: 1px solid rgb(var(--line) / .8); border-radius: 1rem;
+        box-shadow: 0 12px 32px -8px rgba(15,42,92,.06), 0 4px 12px -2px rgba(37,99,235,.04); transition: all .25s ease; }
+.card-hover:hover { transform: translateY(-4px); border-color: rgba(37,99,235,.4);
+        box-shadow: 0 20px 40px -12px rgba(15,42,92,.12), 0 8px 16px -4px rgba(37,99,235,.08); }
+ .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-weight: 700; font-size: 14px;
+       letter-spacing: .02em; border-radius: .75rem; padding: .8rem 1.75rem; transition: all .2s ease; cursor: pointer; }
+.btn:active { transform: scale(.98); }
+.btn-primary { color: #fff; background: #2563EB; box-shadow: 0 10px 25px -5px rgba(37,99,235,.35); }
+.btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn-outline { color: rgb(var(--primary)); background: rgb(var(--lowest)); border: 1.5px solid rgba(37,99,235,.3); }
+.btn-outline:hover { background: rgb(var(--low)); border-color: rgb(var(--primary)); }
+ .chip { display: inline-flex; align-items: center; gap: .375rem; border-radius: 9999px; padding: 4px 12px; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.chip-ok { background: rgba(6,182,212,.12); color: #0284C7; border: 1px solid rgba(6,182,212,.3); }
+.chip-full { background: #F1F5F9; color: #64748B; border: 1px solid #E2E8F0; }
+.chip-tag { background: rgba(37,99,235,.1); color: rgb(var(--primary)); border: 1px solid rgba(37,99,235,.2); }
+.dark .chip-ok { color: #22d3ee; }
+.dark .chip-full { background: rgb(var(--container)); color: rgb(var(--muted)); border-color: rgb(var(--line)); }
+ .field { width: 100%; background: rgb(var(--lowest)); border: 1.5px solid rgb(var(--line)); border-radius: .75rem;
+         padding: .75rem 1rem; color: rgb(var(--navy)); font-size: 15px; transition: all .15s; }
+.field::placeholder { color: rgb(var(--outline) / .7); }
+.field:focus { outline: none; border-color: rgb(var(--primary)); box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+.field.is-invalid { border-color: #ba1a1a; box-shadow: 0 0 0 3px rgba(186,26,26,.12); }
+ .orb { position: absolute; border-radius: 9999px; pointer-events: none; filter: blur(80px);
+       background: rgba(37,99,235,.10); z-index: -1; }
+ .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+ @keyframes pop { 0% { transform: scale(.6); opacity: 0 } 70% { transform: scale(1.08) } 100% { transform: scale(1); opacity: 1 } }
+.pop { animation: pop .5s ease-out both; }
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* ---- Admin ---- */
+.chip-err { background: #ffdad6; color: #93000a; border: 1px solid rgba(186,26,26,.25); }
+.dark .chip-err { background: rgba(186,26,26,.2); color: #ffb4ab; }
+input.peer:checked + div .tick { opacity: 1; }
+
+
+/* ---- Tombol tema berbentuk kapsul ---- */
+.theme-toggle { position: relative; display: inline-flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+                width: 64px; height: 34px; padding: 3px; border-radius: 9999px; cursor: pointer;
+                background: rgb(var(--low)); border: 1px solid rgb(var(--line)); transition: background .3s, border-color .3s; }
+.theme-toggle:hover { border-color: rgba(37,99,235,.45); }
+.theme-toggle:focus-visible { outline: 2px solid rgb(var(--primary)); outline-offset: 2px; }
+.theme-toggle .tt-knob { position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 9999px;
+                         background: #2563EB; box-shadow: 0 3px 8px -2px rgba(37,99,235,.55);
+                         transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+.theme-toggle .tt-icon { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;
+                         width: 26px; height: 26px; font-size: 16px; color: #fff; transition: opacity .25s; }
+/* Mode terang: hanya matahari (di dalam knob kiri). Mode gelap: hanya bulan (di dalam knob kanan). */
+.theme-toggle .tt-sun { opacity: 1; }
+.theme-toggle .tt-moon { opacity: 0; }
+.dark .theme-toggle .tt-knob { transform: translateX(30px); }
+.dark .theme-toggle .tt-sun { opacity: 0; }
+.dark .theme-toggle .tt-moon { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .theme-toggle .tt-knob, .theme-toggle .tt-icon { transition: none; } }
+
+/* ---- Landing: FAQ & lightbox ---- */
+.faq summary::-webkit-details-marker { display: none; }
+.faq[open] .faq-icon { transform: rotate(180deg); }
+.lightbox { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 12px; padding: 24px; background: rgba(9, 16, 30, .88); backdrop-filter: blur(6px); animation: lbfade .2s ease-out; }
+.lightbox img { max-width: min(1100px, 100%); max-height: 78vh; border-radius: 16px; box-shadow: 0 25px 60px -10px rgba(0,0,0,.6); object-fit: contain; }
+.lightbox p { color: #fff; font-weight: 600; font-size: 14px; }
+.lightbox button { position: absolute; top: 18px; right: 18px; width: 42px; height: 42px; border-radius: 9999px; color: #fff;
+                   background: rgba(255,255,255,.15); font-size: 22px; line-height: 1; }
+.lightbox button:hover { background: rgba(255,255,255,.28); }
+@keyframes lbfade { from { opacity: 0 } to { opacity: 1 } }
+
+/* ---- Menu admin: aktif = biru, lainnya abu-abu ---- */
+.admin-nav a.is-active { color: rgb(var(--primary)); font-weight: 700; }
+
+
+/* ---- Galeri: carousel coverflow 3D ---- */
+.gallery-nav { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 46px; height: 46px; border-radius: 9999px;
+               background: rgb(var(--lowest)); color: rgb(var(--primary)); border: 1px solid rgb(var(--line));
+               box-shadow: 0 6px 16px -6px rgba(15,42,92,.18); transition: all .2s; cursor: pointer; }
+.gallery-nav:hover:not(:disabled) { background: rgb(var(--primary)); color: #fff; border-color: transparent; transform: scale(1.06); }
+.gallery-nav:disabled { opacity: .35; cursor: default; }
+
+/* tanpa JS: deretan foto yang bisa digeser biasa */
+.cf-stage { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 2px 14px; scrollbar-width: none; }
+.cf-stage::-webkit-scrollbar { display: none; }
+.cf-slide { position: relative; flex: 0 0 78%; aspect-ratio: 4 / 3; scroll-snap-align: center; border-radius: 22px; overflow: hidden; padding: 0; background: rgb(var(--container)); }
+.cf-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+
+/* dengan JS: panggung 3D */
+.cf-stage.is-3d { display: block; position: relative; overflow: visible; perspective: 1500px; perspective-origin: 50% 45%; padding: 0;
+                  touch-action: pan-y; cursor: grab; outline: none; -webkit-tap-highlight-color: transparent; }
+.cf-stage.is-3d:active { cursor: grabbing; }
+.cf-stage.is-3d:focus-visible { box-shadow: 0 0 0 3px rgba(37,99,235,.35); border-radius: 24px; }
+.cf-stage.is-3d .cf-slide { position: absolute; left: 50%; top: 24px; width: min(640px, 72%); flex: none; aspect-ratio: auto; margin-left: calc(min(640px, 72%) / -2);
+                            transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; cursor: pointer;
+                            box-shadow: 0 26px 50px -22px rgba(15,42,92,.5); }
+.cf-stage.is-3d.is-dragging, .cf-stage.is-3d.is-dragging .cf-slide { cursor: grabbing; user-select: none; }
+.cf { --cf-ease: cubic-bezier(.32, .72, 0, 1); }
+.cf-slide.is-active { cursor: zoom-in; }
+/* Gerakan antar foto: transisi CSS (compositor) -> tetap mulus walau JS sedang sibuk */
+/* --cf-swing: kurva dengan overshoot -> foto mengayun sedikit melewati titik tujuan lalu berhenti (angka 1.3 = kuat ayunan; 1 = tanpa ayun) */
+.cf { --cf-ease: cubic-bezier(.22, 1, .36, 1); --cf-swing: cubic-bezier(.3, 1.3, .5, 1); --cf-move: 1100ms; }
+.cf-stage.is-3d .cf-slide { transition: transform var(--cf-move) var(--cf-swing), opacity .8s var(--cf-ease); }
+.cf-stage.is-3d .cf-dim { transition: opacity .8s var(--cf-ease); }
+/* Foto sedikit diperbesar agar ada ruang untuk parallax; foto tengah zoom pelan (Ken Burns) */
+.cf-stage.is-3d .cf-slide img { scale: 1.12; will-change: transform; transition: transform var(--cf-move) var(--cf-swing), scale 1s var(--cf-ease); }
+.cf-stage.is-3d .cf-slide.is-active img { scale: 1.2; transition: transform var(--cf-move) var(--cf-swing), scale 7s ease-out; }
+/* Tanpa animasi: saat di-drag, atau saat foto "menyeberang" lewat belakang */
+.cf-stage.is-3d.is-dragging .cf-slide, .cf-stage.is-3d.is-dragging .cf-slide img, .cf-stage.is-3d.is-dragging .cf-dim,
+.cf-stage.is-3d .cf-slide.cf-snap, .cf-stage.is-3d .cf-slide.cf-snap img, .cf-stage.is-3d .cf-slide.cf-snap .cf-dim { transition: none !important; }
+/* Pengguna dengan "kurangi animasi": cukup pudar halus, tanpa geser/zoom */
+@media (prefers-reduced-motion: reduce) {
+    .cf-stage.is-3d .cf-slide { transition: opacity .5s ease; }
+    .cf-stage.is-3d .cf-slide img { scale: 1; transition: none; }
+    .cf-stage.is-3d .cf-slide.is-active img { scale: 1; }
+}
+.cf-dim { position: absolute; inset: 0; background: #0b1730; opacity: 0; pointer-events: none; }
+.cf-slide:focus-visible { outline: 3px solid rgb(var(--primary)); outline-offset: 3px; }
+
+.cf-shade { position: absolute; inset: 0; background: rgba(15,42,92,.22); pointer-events: none; }
+.cf-num { position: absolute; left: 16px; top: 14px; color: #fff; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-shadow: 0 1px 8px rgba(0,0,0,.4); }
+.cf-zoom { position: absolute; right: 14px; top: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 9999px;
+           color: #fff; font-size: 20px; background: rgba(255,255,255,.2); backdrop-filter: blur(6px); opacity: 0; transform: scale(.8); transition: all .3s; }
+.cf-slide.is-active:hover .cf-zoom { opacity: 1; transform: none; }
+
+.cf-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 22px; }
+.cf-info { min-width: 0; flex: 0 1 360px; text-align: center; }
+.cf-room { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--primary)); }
+.cf-title { margin-top: 2px; font-size: 22px; font-weight: 800; letter-spacing: -.01em; color: rgb(var(--navy)); }
+.cf-info.cf-swap .cf-room, .cf-info.cf-swap .cf-title { animation: cfIn .55s cubic-bezier(.22,.8,.24,1) both; }
+.cf-info.cf-swap .cf-title { animation-delay: .06s; }
+.cf-info.cf-out .cf-room, .cf-info.cf-out .cf-title { opacity: 0; transform: translateY(-8px); transition: opacity .2s ease, transform .2s ease; }
+@keyframes cfIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+.cf-dots { display: flex; align-items: center; justify-content: center; margin-top: 14px; }
+.cf-dot { padding: 12px 4px; cursor: pointer; background: none; }
+.cf-dot i { position: relative; display: block; width: 8px; height: 8px; border-radius: 9999px; overflow: hidden;
+            background: rgb(var(--primary) / .22); transition: width .45s cubic-bezier(.22,.8,.24,1), background .3s; }
+.cf-dot:hover i { background: rgb(var(--primary) / .45); }
+.cf-dot.is-active i { width: 34px; }
+.cf-dot i::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: #2563EB;
+                    transform: scaleX(0); transform-origin: left; }
+.cf-dot.is-active i::before { transform: scaleX(1); }
+.cf-dot.is-active.is-run i::before { animation: cfFill var(--cf-dur, 5200ms) linear both; }
+.cf-dot:focus-visible { outline: 2px solid rgb(var(--primary)); outline-offset: 0; border-radius: 9999px; }
+@keyframes cfFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (max-width: 640px) {
+    .cf-stage.is-3d .cf-slide { width: 76%; margin-left: -38%; border-radius: 18px; }
+    .cf-title { font-size: 18px; }
+    .cf-controls { gap: 12px; }
+    .gallery-nav { width: 40px; height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cf-info.cf-swap .cf-room, .cf-info.cf-swap .cf-title { animation: none; }
+    .cf-info.cf-out .cf-room, .cf-info.cf-out .cf-title { transition: none; }
+}
+
+/* ---- Banner CTA: terang & gelap ---- */
+.cta-banner { background: #F0F7FF; border: 1.5px solid rgba(147,197,253,.7);
+              box-shadow: 0 20px 40px -15px rgba(37,99,235,.12); }
+.cta-pill { background: rgba(255,255,255,.8); }
+.dark .cta-banner { background: #122B55; border-color: rgba(110,160,255,.28);
+                    box-shadow: 0 24px 50px -22px rgba(0,0,0,.65); }
+.dark .cta-pill { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); }
+.dark .cta-blob { opacity: .2; }
